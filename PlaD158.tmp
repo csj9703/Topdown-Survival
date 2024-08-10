@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://b716so21wd2vl"]
+[gd_scene load_steps=68 format=3 uid="uid://b716so21wd2vl"]
 
 [ext_resource type="Texture2D" uid="uid://duv611vfvc8s4" path="res://art/handgun/idle/survivor-idle_handgun_0.png" id="1_4lydt"]
 [ext_resource type="Script" path="res://Player.gd" id="1_ddbxm"]
@@ -59,9 +59,6 @@
 [ext_resource type="Texture2D" uid="uid://du2wt2483osa" path="res://art/handgun/shoot/survivor-shoot_handgun_0.png" id="57_aawrr"]
 [ext_resource type="Texture2D" uid="uid://oql3jjwkfj0g" path="res://art/handgun/shoot/survivor-shoot_handgun_1.png" id="58_osw6g"]
 [ext_resource type="Texture2D" uid="uid://dhkbs3w6n3xwx" path="res://art/handgun/shoot/survivor-shoot_handgun_2.png" id="59_bw52r"]
-[ext_resource type="Script" path="res://Camera2D.gd" id="60_kpp5y"]
-[ext_resource type="Texture2D" uid="uid://b52geo3nvj1kb" path="res://art/handgun/light.png" id="61_5m5lq"]
-[ext_resource type="Texture2D" uid="uid://dt8goj6cis4i" path="res://art/handgun/flashlight.png" id="62_hvkv2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6lqn7"]
 animations = [{
@@ -402,36 +399,23 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(272, 157)
+position = Vector2(236, 187)
 slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_ddbxm")
 metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-4, 2)
-zoom = Vector2(3, 3)
-limit_left = 0
-limit_top = 0
-limit_right = 1280
-limit_bottom = 720
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 1.0
-rotation_smoothing_speed = 0.05
-editor_draw_limits = true
-script = ExtResource("60_kpp5y")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_6lqn7")
 animation = &"shoot"
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4.08, 1.825)
-scale = Vector2(0.252, 0.171)
+visible = false
+position = Vector2(-1.595, 5.74)
+scale = Vector2(1.31, 0.941)
 shape = SubResource("CapsuleShape2D_w2mg3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -442,22 +426,4 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../AnimationPlayer")
 
-[node name="Flashlight" type="PointLight2D" parent="."]
-scale = Vector2(1, 0.75)
-energy = 0.5
-shadow_enabled = true
-shadow_filter_smooth = 6.5
-texture = ExtResource("62_hvkv2")
-offset = Vector2(167, 9)
-
-[node name="CharacterLight" type="PointLight2D" parent="."]
-energy = 0.75
-shadow_enabled = true
-texture = ExtResource("61_5m5lq")
-texture_scale = 0.1
-
-[node name="MuzzleFlash" type="PointLight2D" parent="."]
-shadow_enabled = true
-texture = ExtResource("61_5m5lq")
-
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[node name="Camera2D" type="Camera2D" parent="."]
