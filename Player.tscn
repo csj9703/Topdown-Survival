@@ -430,8 +430,8 @@ animation = &"shoot"
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4.08, 1.825)
-scale = Vector2(0.252, 0.171)
+position = Vector2(-0.695, 1.37)
+scale = Vector2(0.267, 0.181)
 shape = SubResource("CapsuleShape2D_w2mg3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
