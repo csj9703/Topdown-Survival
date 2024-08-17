@@ -402,7 +402,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(272, 157)
+position = Vector2(263, 157)
 slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
@@ -410,7 +410,7 @@ script = ExtResource("1_ddbxm")
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-4, 2)
+position = Vector2(2, 2)
 zoom = Vector2(3, 3)
 limit_left = 0
 limit_top = 0
@@ -424,14 +424,16 @@ editor_draw_limits = true
 script = ExtResource("60_kpp5y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(6.09998, 0.750002)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_6lqn7")
 animation = &"shoot"
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.695, 1.37)
-scale = Vector2(0.267, 0.181)
+position = Vector2(2.01998, 2.575)
+scale = Vector2(0.252, 0.171)
+
 shape = SubResource("CapsuleShape2D_w2mg3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -443,6 +445,7 @@ libraries = {
 root_node = NodePath("../AnimationPlayer")
 
 [node name="Flashlight" type="PointLight2D" parent="."]
+position = Vector2(5, 1)
 scale = Vector2(1, 0.75)
 energy = 0.5
 shadow_enabled = true
@@ -451,12 +454,14 @@ texture = ExtResource("62_hvkv2")
 offset = Vector2(167, 9)
 
 [node name="CharacterLight" type="PointLight2D" parent="."]
+position = Vector2(5, 1)
 energy = 0.75
 shadow_enabled = true
 texture = ExtResource("61_5m5lq")
 texture_scale = 0.1
 
 [node name="MuzzleFlash" type="PointLight2D" parent="."]
+position = Vector2(5, 1)
 shadow_enabled = true
 texture = ExtResource("61_5m5lq")
 
