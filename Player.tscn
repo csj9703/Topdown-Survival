@@ -410,7 +410,7 @@ script = ExtResource("1_ddbxm")
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(130, 6)
+position = Vector2(2, 2)
 zoom = Vector2(3, 3)
 limit_left = 0
 limit_top = 0
