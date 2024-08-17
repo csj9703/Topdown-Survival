@@ -14,24 +14,29 @@ var light_decay_timer = 0.0
 
 func get_input():
 	if !is_reloading and !is_shooting:
+		# Rotate player towards mouse
 		var target_direction = get_global_mouse_position() - global_position
 		var target_angle = target_direction.angle()
 		var current_angle = rotation
-		rotation = lerp_angle(current_angle, target_angle, interpolation_factor) # Smooth the player rotation to increase difficulty
+		rotation = lerp_angle(current_angle, target_angle, interpolation_factor)
 
-		# Forward (toward the mouse) and backward (away from the mouse) movement
-		var forward_input = Input.get_axis("move_down", "move_up")
-		var forward_direction = transform.x * forward_input
+		# Movement based on screen orientation, not player rotation
+		var movement_direction = Vector2.ZERO
+		
+		if Input.is_action_pressed("move_up"):
+			movement_direction.y -= 1
+		if Input.is_action_pressed("move_down"):
+			movement_direction.y += 1
+		if Input.is_action_pressed("move_left"):
+			movement_direction.x -= 1
+		if Input.is_action_pressed("move_right"):
+			movement_direction.x += 1
+		
+		# Normalize movement direction and apply speed
+		if movement_direction != Vector2.ZERO:
+			movement_direction = movement_direction.normalized() * speed
 
-		# Side (left/right) movement relative to the player's current direction
-		var side_input = Input.get_axis("move_left", "move_right")
-		var side_direction = Vector2(-transform.x.y, transform.x.x) * side_input # Perpendicular vector to the forward direction
-
-		# Combine the forward/backward and side movements
-		var movement_direction = forward_direction + side_direction
-
-		# Calculate the velocity based on the movement direction and speed
-		velocity = movement_direction.normalized() * speed if movement_direction != Vector2.ZERO else Vector2.ZERO
+		velocity = movement_direction
 	else:
 		velocity = Vector2.ZERO
 

@@ -1,6 +1,5 @@
 [gd_scene load_steps=7 format=4 uid="uid://2ln8lblky4b3"]
 
-
 [ext_resource type="PackedScene" uid="uid://b716so21wd2vl" path="res://Player.tscn" id="1_6dpgb"]
 [ext_resource type="Script" path="res://Game.gd" id="1_b78pm"]
 [ext_resource type="Texture2D" uid="uid://ddoi2cq3w1a6r" path="res://art/level_sprites/scifi_sheet.png" id="1_ukl8a"]
