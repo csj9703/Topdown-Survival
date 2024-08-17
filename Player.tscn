@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://b716so21wd2vl"]
+[gd_scene load_steps=87 format=3 uid="uid://b716so21wd2vl"]
 
 [ext_resource type="Texture2D" uid="uid://duv611vfvc8s4" path="res://art/handgun/idle/survivor-idle_handgun_0.png" id="1_4lydt"]
 [ext_resource type="Script" path="res://Player.gd" id="1_ddbxm"]
@@ -22,20 +22,35 @@
 [ext_resource type="Texture2D" uid="uid://dxnynrrx4w7ap" path="res://art/handgun/idle/survivor-idle_handgun_18.png" id="19_hu6nb"]
 [ext_resource type="Texture2D" uid="uid://nvjjo65845bi" path="res://art/handgun/idle/survivor-idle_handgun_19.png" id="20_sexm8"]
 [ext_resource type="Texture2D" uid="uid://dmx6cdq2hd2x6" path="res://art/handgun/move/survivor-move_handgun_0.png" id="22_marya"]
+[ext_resource type="Texture2D" uid="uid://bdulgi0pecm62" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_0.png" id="23_3k328"]
 [ext_resource type="Texture2D" uid="uid://baplbpvm5vnhj" path="res://art/handgun/move/survivor-move_handgun_1.png" id="23_traed"]
 [ext_resource type="Texture2D" uid="uid://ce7dncvn7cobb" path="res://art/handgun/move/survivor-move_handgun_2.png" id="24_3eous"]
+[ext_resource type="Texture2D" uid="uid://di5w23w1hp76o" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_1.png" id="24_ju3ha"]
+[ext_resource type="Texture2D" uid="uid://cmry24m5uy1ln" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_2.png" id="25_4i7y4"]
 [ext_resource type="Texture2D" uid="uid://d2pj5jv63kpx0" path="res://art/handgun/move/survivor-move_handgun_3.png" id="25_g2kq2"]
+[ext_resource type="Texture2D" uid="uid://dhvlsxq2p7iq0" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_3.png" id="26_nstfr"]
 [ext_resource type="Texture2D" uid="uid://ire1qk036xr" path="res://art/handgun/move/survivor-move_handgun_4.png" id="26_rabml"]
+[ext_resource type="Texture2D" uid="uid://bbpstd7rbu3xm" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_4.png" id="27_ha2q1"]
 [ext_resource type="Texture2D" uid="uid://cao11oyuapy7n" path="res://art/handgun/move/survivor-move_handgun_5.png" id="27_lqesb"]
+[ext_resource type="Texture2D" uid="uid://bvs3jl36js4ws" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_5.png" id="28_fqw10"]
 [ext_resource type="Texture2D" uid="uid://bo35w0plfekpw" path="res://art/handgun/move/survivor-move_handgun_6.png" id="28_qq066"]
+[ext_resource type="Texture2D" uid="uid://mv1caaiyd1s2" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_6.png" id="29_7ukyx"]
 [ext_resource type="Texture2D" uid="uid://bhkiyx0gvemnk" path="res://art/handgun/move/survivor-move_handgun_7.png" id="29_svo28"]
 [ext_resource type="Texture2D" uid="uid://kvwy240nof1" path="res://art/handgun/move/survivor-move_handgun_8.png" id="30_8sbqb"]
+[ext_resource type="Texture2D" uid="uid://bbv6gbqwgxj1f" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_7.png" id="30_avg3m"]
+[ext_resource type="Texture2D" uid="uid://bnwb3lpygwnp8" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_8.png" id="31_7gjqs"]
 [ext_resource type="Texture2D" uid="uid://b1yuaevplstab" path="res://art/handgun/move/survivor-move_handgun_9.png" id="31_8xyvv"]
+[ext_resource type="Texture2D" uid="uid://c1j0ajwb5qjld" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_9.png" id="32_sqya6"]
 [ext_resource type="Texture2D" uid="uid://bu1udfm14fpgn" path="res://art/handgun/move/survivor-move_handgun_10.png" id="32_svt5w"]
 [ext_resource type="Texture2D" uid="uid://llj0vpmeebeo" path="res://art/handgun/move/survivor-move_handgun_11.png" id="33_6gick"]
+[ext_resource type="Texture2D" uid="uid://bindvs35b1aft" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_10.png" id="33_uuvrw"]
+[ext_resource type="Texture2D" uid="uid://bqgq4r6ylbc2y" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_11.png" id="34_onatc"]
 [ext_resource type="Texture2D" uid="uid://bmvoaji7akaav" path="res://art/handgun/move/survivor-move_handgun_12.png" id="34_sxhu2"]
+[ext_resource type="Texture2D" uid="uid://8vv6yv7sleic" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_12.png" id="35_nbuej"]
 [ext_resource type="Texture2D" uid="uid://pvqo8vaqxqlb" path="res://art/handgun/move/survivor-move_handgun_13.png" id="35_qy7sq"]
 [ext_resource type="Texture2D" uid="uid://3uh6lnu32oio" path="res://art/handgun/move/survivor-move_handgun_14.png" id="36_if2vm"]
+[ext_resource type="Texture2D" uid="uid://dwbkjmgaoa45o" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_13.png" id="36_rfe42"]
+[ext_resource type="Texture2D" uid="uid://o6cyyp6ifa86" path="res://art/handgun/meleeattack/survivor-meleeattack_handgun_14.png" id="37_at281"]
 [ext_resource type="Texture2D" uid="uid://bk7mq6wlvf5q1" path="res://art/handgun/move/survivor-move_handgun_15.png" id="37_dfevc"]
 [ext_resource type="Texture2D" uid="uid://cuhx8p3eyslhp" path="res://art/handgun/move/survivor-move_handgun_16.png" id="38_st7yt"]
 [ext_resource type="Texture2D" uid="uid://dqwelvpiypx87" path="res://art/handgun/move/survivor-move_handgun_17.png" id="39_2kmr1"]
@@ -129,6 +144,56 @@ animations = [{
 "loop": false,
 "name": &"idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_3k328")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ju3ha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_4i7y4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_nstfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_ha2q1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_fqw10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_7ukyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_avg3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_7gjqs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_sqya6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_uuvrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_onatc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_nbuej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_rfe42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_at281")
+}],
+"loop": false,
+"name": &"melee",
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -392,10 +457,40 @@ tracks/1/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_wgk2c"]
+resource_name = "melee"
+length = 1.47
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"melee"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fmu46"]
 _data = {
 "RESET": SubResource("Animation_xnf58"),
 "idle": SubResource("Animation_2jw1p"),
+"melee": SubResource("Animation_wgk2c"),
 "move": SubResource("Animation_dpou2"),
 "reload": SubResource("Animation_s4dka"),
 "shoot": SubResource("Animation_qixmh")
@@ -427,12 +522,12 @@ script = ExtResource("60_kpp5y")
 position = Vector2(6.09998, 0.750002)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_6lqn7")
-animation = &"shoot"
+animation = &"melee"
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.01998, 2.575)
-scale = Vector2(0.252, 0.171)
+position = Vector2(4.585, 0.655)
+scale = Vector2(0.257, 0.171)
 shape = SubResource("CapsuleShape2D_w2mg3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

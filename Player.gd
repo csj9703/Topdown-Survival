@@ -9,10 +9,12 @@ extends CharacterBody2D
 
 var is_reloading = false
 var is_shooting = false
+var is_aiming = false
+var is_meleeing = false
 var light_decay_timer = 0.0
 
 func get_input():
-	if !is_reloading and !is_shooting:
+	if !is_reloading and !is_shooting and !is_aiming and !is_meleeing:
 		# Rotate player towards mouse
 		var target_direction = get_global_mouse_position() - global_position
 		var target_angle = target_direction.angle()
@@ -52,7 +54,14 @@ func shoot() -> void:
 	$AnimatedSprite2D.play("shoot")
 	await $AnimatedSprite2D.animation_finished
 	is_shooting = false
-	
+
+# TODO: Change this to use animation tree
+func melee() -> void:
+	print('meleeing')
+	$AnimatedSprite2D.play("melee")
+	await $AnimatedSprite2D.animation_finished
+	is_meleeing = false
+		
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
@@ -73,6 +82,10 @@ func _process(_delta):
 	elif Input.is_action_pressed("shoot") and not is_shooting:
 		is_shooting = true
 		await shoot()
+	
+	elif Input.is_action_pressed("melee") and not is_meleeing:
+		is_meleeing = true
+		await melee()
 
 	if velocity.length() != 0:
 		$AnimatedSprite2D.animation = "move"
@@ -80,6 +93,8 @@ func _process(_delta):
 		$AnimatedSprite2D.animation = "reload"
 	elif is_shooting:
 		$AnimatedSprite2D.animation = "shoot"
+	elif is_meleeing:
+		$AnimatedSprite2D.animation = "melee"
 	elif velocity.length() == 0:
 		$AnimatedSprite2D.animation = "idle"
 
