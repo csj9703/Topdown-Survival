@@ -433,7 +433,6 @@ frame = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.01998, 2.575)
 scale = Vector2(0.252, 0.171)
-
 shape = SubResource("CapsuleShape2D_w2mg3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
