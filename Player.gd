@@ -2,15 +2,14 @@ extends CharacterBody2D
 
 @export var speed = 50.0
 @export var interpolation_factor = 0.05
-var is_reloading = false
-var is_shooting = false
-
-var light_decay_timer = 0.0
 @export var light_duration = 0.11
 @export var light_intensity = 1
 
-# Reference to the Light2D node
 @onready var gun_light = $MuzzleFlash
+
+var is_reloading = false
+var is_shooting = false
+var light_decay_timer = 0.0
 
 func get_input():
 	if !is_reloading and !is_shooting:
@@ -85,7 +84,7 @@ func _process(_delta):
 		$AnimatedSprite2D.animation = "idle"
 
 func _on_animated_sprite_2d_frame_changed():
-	if $AnimatedSprite2D.animation == "shoot" and $AnimatedSprite2D.frame == 1: # Frame index starts from 0
+	if $AnimatedSprite2D.animation == "shoot" and $AnimatedSprite2D.frame == 1:
 		# Emit light from the gun
 		gun_light.energy = light_intensity
 		light_decay_timer = light_duration
