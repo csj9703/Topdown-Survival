@@ -12,6 +12,10 @@ var is_shooting = false
 var is_aiming = false
 var is_meleeing = false
 var light_decay_timer = 0.0
+var can_move = true
+
+func set_can_move(value: bool):
+	can_move = value
 
 func get_input():
 	if !is_reloading and !is_shooting and !is_aiming and !is_meleeing:
@@ -61,10 +65,11 @@ func melee() -> void:
 	$AnimatedSprite2D.play("melee")
 	await $AnimatedSprite2D.animation_finished
 	is_meleeing = false
-		
+
 func _physics_process(delta):
-	get_input()
-	move_and_slide()
+	if can_move:
+		get_input()
+		move_and_slide()
 	# Decay the light over time
 	if light_decay_timer > 0:
 		light_decay_timer -= delta
