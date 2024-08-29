@@ -103,6 +103,9 @@ func _process(_delta):
 	elif velocity.length() == 0:
 		$AnimatedSprite2D.animation = "idle"
 
+func get_is_aiming():
+	return is_aiming
+
 func _on_animated_sprite_2d_frame_changed():
 	if $AnimatedSprite2D.animation == "shoot" and $AnimatedSprite2D.frame == 1:
 		# Emit light from the gun
