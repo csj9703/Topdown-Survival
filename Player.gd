@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed = 50.0
 @export var interpolation_factor = 0.05
 @export var light_duration = 0.11
-@export var light_intensity = 1
+@export var light_intensity = 3
 
 @onready var gun_light = $MuzzleFlash
 
@@ -42,25 +42,27 @@ func get_input() -> void:
 	else:
 		velocity = Vector2.ZERO
 
-# TODO: Change this to use animation tree
 func reload() -> void:
 	print('reloading')
 	$AnimationPlayer.play("reload")
 	await $AnimationPlayer.animation_finished
 	is_reloading = false
-	
-# TODO: Change this to use animation tree
+
 func shoot() -> void:
 	print('shooting')
-	$AnimatedSprite2D.play("shoot")
-	await $AnimatedSprite2D.animation_finished
+	$AnimationPlayer.play("shoot")
+	
+	# Emit light when shooting
+	gun_light.energy = light_intensity
+	light_decay_timer = light_duration
+	
+	await $AnimationPlayer.animation_finished
 	is_shooting = false
 
-# TODO: Change this to use animation tree
 func melee() -> void:
 	print('meleeing')
-	$AnimatedSprite2D.play("melee")
-	await $AnimatedSprite2D.animation_finished
+	$AnimationPlayer.play("melee")
+	await $AnimationPlayer.animation_finished
 	is_meleeing = false
 
 func _physics_process(delta) -> void:
@@ -74,8 +76,8 @@ func _physics_process(delta) -> void:
 	else:
 		gun_light.energy = 0.0
 	
-func _process(_delta) -> void:
-	$AnimatedSprite2D.play()
+func _process(delta) -> void:
+	$AnimationPlayer.play()
 
 	if Input.is_action_pressed("reload") and not is_reloading:
 		is_reloading = true
@@ -90,16 +92,17 @@ func _process(_delta) -> void:
 		await melee()
 
 	if velocity.length() != 0:
-		$AnimatedSprite2D.animation = "move"
+		$AnimationPlayer.play("move")
 	elif is_reloading:
-		$AnimatedSprite2D.animation = "reload"
+		$AnimationPlayer.play("reload")
 	elif is_shooting:
-		$AnimatedSprite2D.animation = "shoot"
+		$AnimationPlayer.play("shoot")
 	elif is_meleeing:
-		$AnimatedSprite2D.animation = "melee"
+		$AnimationPlayer.play("melee")
 	elif velocity.length() == 0:
-		$AnimatedSprite2D.animation = "idle"
-
+		$AnimationPlayer.play("idle")
+			
+			
 # Getters and Setters
 func set_can_move(value: bool) -> void:
 	can_move = value
@@ -109,9 +112,6 @@ func get_is_aiming() -> bool:
 
 func get_is_meleeing() -> bool:
 	return is_meleeing
-
-func _on_animated_sprite_2d_frame_changed() -> void:
-	if $AnimatedSprite2D.animation == "shoot" and $AnimatedSprite2D.frame == 1:
-		# Emit light from the gun
-		gun_light.energy = light_intensity
-		light_decay_timer = light_duration
+	
+func get_is_reloading() -> bool:
+	return is_reloading

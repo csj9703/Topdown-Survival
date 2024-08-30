@@ -172,7 +172,7 @@ position = Vector2(180, 119)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(0, 4.54747e-13)
-color = Color(0.00351917, 0.00351917, 0.00351916, 1)
+color = Color(0.0338533, 0.0338533, 0.0338533, 1)
 
 [node name="Crosshair" type="Node2D" parent="."]
 position = Vector2(0, 7.62939e-06)
