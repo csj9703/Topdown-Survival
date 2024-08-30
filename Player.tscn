@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://b716so21wd2vl"]
+[gd_scene load_steps=90 format=3 uid="uid://b716so21wd2vl"]
 
 [ext_resource type="Texture2D" uid="uid://duv611vfvc8s4" path="res://art/handgun/idle/survivor-idle_handgun_0.png" id="1_4lydt"]
 [ext_resource type="Script" path="res://Player.gd" id="1_ddbxm"]
@@ -77,6 +77,8 @@
 [ext_resource type="Script" path="res://Camera2D.gd" id="60_kpp5y"]
 [ext_resource type="Texture2D" uid="uid://b52geo3nvj1kb" path="res://art/handgun/light.png" id="61_5m5lq"]
 [ext_resource type="Texture2D" uid="uid://dt8goj6cis4i" path="res://art/handgun/flashlight.png" id="62_hvkv2"]
+[ext_resource type="Script" path="res://HitBox.gd" id="76_x3y0t"]
+[ext_resource type="Script" path="res://HurtBox.gd" id="77_wcfi6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6lqn7"]
 animations = [{
@@ -325,11 +327,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w2mg3"]
-radius = 24.9611
-height = 79.31
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qdnb4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m2eht"]
 
 [sub_resource type="Animation" id="Animation_xnf58"]
 length = 0.001
@@ -348,7 +348,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MeleeCollision:position")
+tracks/1/path = NodePath("AnimatedSprite2D/HitBox/MeleeHitbox:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -360,7 +360,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeCollision:rotation")
+tracks/2/path = NodePath("AnimatedSprite2D/HitBox/MeleeHitbox:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -372,7 +372,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeCollision:disabled")
+tracks/3/path = NodePath("AnimatedSprite2D/HitBox/MeleeHitbox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -442,7 +442,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MeleeCollision:position")
+tracks/2/path = NodePath("AnimatedSprite2D/HitBox/MeleeHitbox:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -454,7 +454,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MeleeCollision:rotation")
+tracks/3/path = NodePath("AnimatedSprite2D/HitBox/MeleeHitbox:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -466,7 +466,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("MeleeCollision:disabled")
+tracks/4/path = NodePath("AnimatedSprite2D/HitBox/MeleeHitbox:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -593,23 +593,31 @@ editor_draw_limits = true
 script = ExtResource("60_kpp5y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(6.09998, 0.750002)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_6lqn7")
 animation = &"melee"
 frame = 1
 
-[node name="CharacterCollision" type="CollisionShape2D" parent="."]
-position = Vector2(3.325, 1.035)
-scale = Vector2(0.282, 0.171)
-skew = 0.219911
-shape = SubResource("CapsuleShape2D_w2mg3")
+[node name="HitBox" type="Area2D" parent="AnimatedSprite2D"]
+script = ExtResource("76_x3y0t")
 
-[node name="MeleeCollision" type="CollisionShape2D" parent="."]
+[node name="MeleeHitbox" type="CollisionShape2D" parent="AnimatedSprite2D/HitBox"]
 position = Vector2(10.995, 4.755)
-scale = Vector2(0.555, 0.23)
+scale = Vector2(5.55, 2.3)
 shape = SubResource("CapsuleShape2D_qdnb4")
 disabled = true
+debug_color = Color(0.964706, 0, 0, 0.419608)
+
+[node name="HurtBox" type="Area2D" parent="AnimatedSprite2D"]
+script = ExtResource("77_wcfi6")
+
+[node name="CharacterCollision" type="CollisionShape2D" parent="."]
+physics_interpolation_mode = 1
+position = Vector2(5.765, 0.055)
+scale = Vector2(1.127, 0.836)
+shape = SubResource("RectangleShape2D_m2eht")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -620,6 +628,7 @@ libraries = {
 root_node = NodePath("../AnimationPlayer")
 
 [node name="Flashlight" type="PointLight2D" parent="."]
+texture_filter = 1
 position = Vector2(5, 1)
 scale = Vector2(1, 0.75)
 energy = 0.5

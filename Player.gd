@@ -14,10 +14,7 @@ var is_meleeing = false
 var light_decay_timer = 0.0
 var can_move = true
 
-func set_can_move(value: bool):
-	can_move = value
-
-func get_input():
+func get_input() -> void:
 	if !is_reloading and !is_shooting and !is_aiming and !is_meleeing:
 		# Rotate player towards mouse
 		var target_direction = get_global_mouse_position() - global_position
@@ -66,7 +63,7 @@ func melee() -> void:
 	await $AnimatedSprite2D.animation_finished
 	is_meleeing = false
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if can_move:
 		get_input()
 		move_and_slide()
@@ -77,7 +74,7 @@ func _physics_process(delta):
 	else:
 		gun_light.energy = 0.0
 	
-func _process(_delta):
+func _process(_delta) -> void:
 	$AnimatedSprite2D.play()
 
 	if Input.is_action_pressed("reload") and not is_reloading:
@@ -103,10 +100,17 @@ func _process(_delta):
 	elif velocity.length() == 0:
 		$AnimatedSprite2D.animation = "idle"
 
-func get_is_aiming():
+# Getters and Setters
+func set_can_move(value: bool) -> void:
+	can_move = value
+
+func get_is_aiming() -> bool:
 	return is_aiming
 
-func _on_animated_sprite_2d_frame_changed():
+func get_is_meleeing() -> bool:
+	return is_meleeing
+
+func _on_animated_sprite_2d_frame_changed() -> void:
 	if $AnimatedSprite2D.animation == "shoot" and $AnimatedSprite2D.frame == 1:
 		# Emit light from the gun
 		gun_light.energy = light_intensity
