@@ -170,9 +170,16 @@ disable_mode = 2
 [node name="Zombie" parent="." instance=ExtResource("4_ldpkp")]
 position = Vector2(180, 119)
 
+[node name="Zombie3" parent="." instance=ExtResource("4_ldpkp")]
+position = Vector2(220, 61)
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(0, 4.54747e-13)
 color = Color(0.00351917, 0.00351917, 0.00351916, 1)
+
+[node name="Zombie2" parent="." instance=ExtResource("4_ldpkp")]
+position = Vector2(0, 7.62939e-06)
+scale = Vector2(0.1, 0.1)
 
 [node name="Crosshair" type="Node2D" parent="."]
 position = Vector2(0, 7.62939e-06)
@@ -181,7 +188,8 @@ script = ExtResource("4_ktt23")
 
 [node name="PointLight2D" type="PointLight2D" parent="Crosshair"]
 position = Vector2(0, -7.62939e-05)
-color = Color(1.63645e-06, 0.932922, 0, 1)
+scale = Vector2(1.5, 1.5)
+color = Color(0, 0.86269, 0, 1)
 texture = ExtResource("5_xgo1t")
 texture_scale = 0.5
 

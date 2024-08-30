@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var initial_ring_size = 0.75
+@export var initial_ring_size = 1.5
 @export var ring_shrink_rate = 0.5
 
 @onready var ring = $Ring

@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cv7tvuqssjdc1"]
+[gd_scene load_steps=15 format=3 uid="uid://cv7tvuqssjdc1"]
 
+[ext_resource type="Script" path="res://Zombie.gd" id="1_o05ms"]
 [ext_resource type="Script" path="res://HitBox.gd" id="3_wpitr"]
 [ext_resource type="Script" path="res://HurtBox.gd" id="4_fdwe8"]
 [ext_resource type="Texture2D" uid="uid://1ytg4gn2dnin" path="res://art/zombie/sprite_sheet.png" id="44_8cpe4"]
@@ -186,6 +187,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l17fh"]
 
 [node name="Zombie" type="CharacterBody2D"]
+script = ExtResource("1_o05ms")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
@@ -219,7 +221,6 @@ libraries = {
 speed_scale = 0.5
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, 0.62)
 scale = Vector2(1.06, 1)
 shape = SubResource("RectangleShape2D_l17fh")
