@@ -77,8 +77,6 @@ func _physics_process(delta) -> void:
 		gun_light.energy = 0.0
 	
 func _process(delta) -> void:
-	$AnimationPlayer.play()
-
 	if Input.is_action_pressed("reload") and not is_reloading:
 		is_reloading = true
 		await reload()

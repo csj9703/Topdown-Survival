@@ -15,3 +15,9 @@ func _physics_process(delta: float) -> void:
 	var direction = Vector2(cos(rotation), sin(rotation)).normalized()
 	velocity = direction * move_speed
 	move_and_slide()
+
+func _process(delta) -> void:
+	if velocity.length() != 0:
+		$AnimationPlayer.play("move")
+	elif velocity.length() == 0:
+		$AnimationPlayer.play("idle")

@@ -221,6 +221,7 @@ libraries = {
 speed_scale = 0.5
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.62)
 scale = Vector2(1.06, 1)
 shape = SubResource("RectangleShape2D_l17fh")

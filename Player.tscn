@@ -416,7 +416,7 @@ debug_color = Color(0.667524, 0.510165, 0.0430527, 0.42)
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(2.095, -0.44)
+position = Vector2(2, 2.44379e-06)
 scale = Vector2(0.877, 0.711)
 shape = SubResource("RectangleShape2D_m2eht")
 
