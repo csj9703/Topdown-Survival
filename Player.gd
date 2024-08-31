@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var bullet: PackedScene
 @export var speed = 50.0
 @export var interpolation_factor = 0.05
 @export var light_duration = 0.11
@@ -7,6 +8,7 @@ extends CharacterBody2D
 
 @onready var gun_light = $MuzzleFlash
 
+var bullet_speed = 2000
 var is_reloading = false
 var is_shooting = false
 var is_aiming = false
@@ -52,9 +54,24 @@ func shoot() -> void:
 	print('shooting')
 	$AnimationPlayer.play("shoot")
 	
+	# Check if bullet is a valid PackedScene
+	if bullet == null:
+		print("Bullet scene is not set")
+		return
+	
 	# Emit light when shooting
 	gun_light.energy = light_intensity
 	light_decay_timer = light_duration
+	
+	var bullet_instance = bullet.instantiate()
+	# Calculate the bullet's initial position in front of the player
+	var bullet_offset = Vector2(30, 0).rotated(rotation)
+	bullet_instance.position = global_position + bullet_offset
+	bullet_instance.rotation_degrees = rotation_degrees+90
+	bullet_instance.linear_velocity = Vector2(bullet_speed, 0).rotated(rotation)
+	
+	# Add bullet to the scene
+	get_tree().get_root().call_deferred('add_child', bullet_instance)
 	
 	await $AnimationPlayer.animation_finished
 	is_shooting = false
@@ -76,7 +93,7 @@ func _physics_process(delta) -> void:
 	else:
 		gun_light.energy = 0.0
 	
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if Input.is_action_pressed("reload") and not is_reloading:
 		is_reloading = true
 		await reload()

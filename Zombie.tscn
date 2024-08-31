@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://cv7tvuqssjdc1"]
+[gd_scene load_steps=17 format=3 uid="uid://cv7tvuqssjdc1"]
 
 [ext_resource type="Script" path="res://Zombie.gd" id="1_o05ms"]
 [ext_resource type="Script" path="res://HitBox.gd" id="3_wpitr"]
 [ext_resource type="Script" path="res://HurtBox.gd" id="4_fdwe8"]
+[ext_resource type="Script" path="res://ZombieMeleeRange.gd" id="6_wnkb8"]
 [ext_resource type="Texture2D" uid="uid://1ytg4gn2dnin" path="res://art/zombie/sprite_sheet.png" id="44_8cpe4"]
 [ext_resource type="Texture2D" uid="uid://qku5sdmuv4x2" path="res://art/zombie/sprite_sheet_n.png" id="45_m36hq"]
 
@@ -14,6 +15,8 @@ texture_filter = 1
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_13aw3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i1wyr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_momg2"]
 
 [sub_resource type="Animation" id="Animation_4g0uf"]
 length = 0.001
@@ -64,6 +67,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(10.74, 5.8)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer:speed_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.25]
 }
 
 [sub_resource type="Animation" id="Animation_hhmd7"]
@@ -116,6 +131,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(10.74, 5.8), Vector2(6.88, 6.145), Vector2(7.39, 7.44), Vector2(7.39, 7.44), Vector2(7.39, 7.44), Vector2(10.47, 5.01), Vector2(10.47, 5.01), Vector2(10.47, 5.65), Vector2(10.47, 5.65), Vector2(10.47, 5.65)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer:speed_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
 }
 
 [sub_resource type="Animation" id="Animation_155f5"]
@@ -175,6 +202,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [Vector2(10.47, 6.785), Vector2(10.47, 6.785), Vector2(10.47, 6.785), Vector2(10.47, 6.785), Vector2(9.935, 6.785), Vector2(9.935, 6.785), Vector2(9.935, 6.785), Vector2(10.08, 7.44), Vector2(10.08, 7.44), Vector2(10.08, 7.085), Vector2(10.08, 7.085), Vector2(10.08, 7.085), Vector2(10.08, 7.085), Vector2(10.08, 7.085), Vector2(10.08, 7.085)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer:speed_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_46lb8"]
 _data = {
@@ -206,6 +245,7 @@ disabled = true
 debug_color = Color(0.996078, 0, 0, 0.419608)
 
 [node name="HurtBox" type="Area2D" parent="Sprite2D"]
+visible = false
 script = ExtResource("4_fdwe8")
 
 [node name="CharacterHurtbox" type="CollisionShape2D" parent="Sprite2D/HurtBox"]
@@ -214,11 +254,20 @@ scale = Vector2(10.74, 5.8)
 shape = SubResource("CapsuleShape2D_i1wyr")
 debug_color = Color(0.668864, 0.479092, 0.0548048, 0.42)
 
+[node name="ZombieMeleeRange" type="Area2D" parent="Sprite2D"]
+script = ExtResource("6_wnkb8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/ZombieMeleeRange"]
+position = Vector2(101.115, 0)
+scale = Vector2(4.34, 4.4)
+shape = SubResource("CapsuleShape2D_momg2")
+debug_color = Color(0.473825, 0.441554, 0.997002, 0.42)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_46lb8")
 }
-speed_scale = 0.5
+speed_scale = 0.25
 
 [node name="CharacterCollision" type="CollisionShape2D" parent="."]
 visible = false

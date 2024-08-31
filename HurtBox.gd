@@ -8,9 +8,12 @@ func _init() -> void:
 func _ready() -> void:
 	connect("area_entered", self._on_area_entered)
 
-# Owner takes damager if hitbox enters hurtbox area
-func _on_area_entered(hitbox: HitBox) -> void:
-	if hitbox == null:
-		return
-	if owner.has_method("take_damage"):
-		owner.take_damage(hitbox.damage)
+# Owner takes damage if hitbox enters hurtbox area
+func _on_area_entered(area: Area2D) -> void:
+	if  area is HitBox:
+		var hitbox = area as HitBox
+		if hitbox == null:
+			return
+		if owner.has_method("take_damage"):
+			owner.take_damage(hitbox.damage)
+		print('take damage!')

@@ -1,6 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://b716so21wd2vl"]
+[gd_scene load_steps=23 format=3 uid="uid://b716so21wd2vl"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_ddbxm"]
+[ext_resource type="PackedScene" uid="uid://2adpaq20q1iv" path="res://Bullet.tscn" id="2_a2r13"]
+[ext_resource type="Script" path="res://PlayerMeleeRange.gd" id="7_lwm8b"]
 [ext_resource type="Script" path="res://Camera2D.gd" id="60_kpp5y"]
 [ext_resource type="Texture2D" uid="uid://b52geo3nvj1kb" path="res://art/handgun/light.png" id="61_5m5lq"]
 [ext_resource type="Texture2D" uid="uid://dt8goj6cis4i" path="res://art/handgun/flashlight.png" id="62_hvkv2"]
@@ -351,6 +353,8 @@ normal_texture = ExtResource("81_5sylv")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r06sk"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_divm8"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m2eht"]
 
 [node name="Player" type="CharacterBody2D"]
@@ -359,6 +363,7 @@ slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_ddbxm")
+bullet = ExtResource("2_a2r13")
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -389,6 +394,7 @@ hframes = 9
 vframes = 9
 
 [node name="HitBox" type="Area2D" parent="Sprite2D"]
+visible = false
 position = Vector2(99.345, 17.655)
 rotation = -0.507891
 scale = Vector2(1.105, 1.105)
@@ -403,6 +409,7 @@ disabled = true
 debug_color = Color(0.964706, 0, 0, 0.419608)
 
 [node name="HurtBox" type="Area2D" parent="Sprite2D"]
+visible = false
 position = Vector2(-4.5, 15.89)
 scale = Vector2(8.69, 4.62)
 skew = 0.18675
@@ -414,8 +421,18 @@ script = ExtResource("77_wcfi6")
 shape = SubResource("CapsuleShape2D_r06sk")
 debug_color = Color(0.667524, 0.510165, 0.0430527, 0.42)
 
+[node name="PlayerMeleeRange" type="Area2D" parent="Sprite2D"]
+script = ExtResource("7_lwm8b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/PlayerMeleeRange"]
+position = Vector2(0, 18.125)
+scale = Vector2(8.215, 4.19)
+shape = SubResource("CapsuleShape2D_divm8")
+debug_color = Color(0.198026, 0.0797337, 1, 0.42)
+
 [node name="CharacterCollision" type="CollisionShape2D" parent="."]
 physics_interpolation_mode = 1
+visible = false
 position = Vector2(2, 2.44379e-06)
 scale = Vector2(0.877, 0.711)
 shape = SubResource("RectangleShape2D_m2eht")
