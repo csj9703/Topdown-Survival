@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var bullet: PackedScene
-@export var speed = 50.0
+@export var speed = 30.0
 @export var interpolation_factor = 0.05
 @export var light_duration = 0.11
 @export var light_intensity = 3
@@ -15,9 +15,11 @@ var is_aiming = false
 var is_meleeing = false
 var light_decay_timer = 0.0
 var can_move = true
+var is_stunned = false
+var stun_timer = 0.0
 
 func get_input() -> void:
-	if !is_reloading and !is_shooting and !is_aiming and !is_meleeing:
+	if !is_stunned and !is_reloading and !is_shooting and !is_aiming and !is_meleeing:
 		# Rotate player towards mouse
 		var target_direction = get_global_mouse_position() - global_position
 		var target_angle = target_direction.angle()
@@ -82,10 +84,22 @@ func melee() -> void:
 	await $AnimationPlayer.animation_finished
 	is_meleeing = false
 
+func stun(duration: float) -> void:
+	is_stunned = true
+	stun_timer = duration
+	can_move = false
+
 func _physics_process(delta) -> void:
 	if can_move:
 		get_input()
 		move_and_slide()
+	
+	if is_stunned:
+		stun_timer -= delta
+		if stun_timer <= 0:
+			is_stunned = false
+			can_move = true
+		
 	# Decay the light over time
 	if light_decay_timer > 0:
 		light_decay_timer -= delta
@@ -94,15 +108,15 @@ func _physics_process(delta) -> void:
 		gun_light.energy = 0.0
 	
 func _process(_delta) -> void:
-	if Input.is_action_pressed("reload") and not is_reloading:
+	if Input.is_action_pressed("reload") and !is_reloading:
 		is_reloading = true
 		await reload()
 		
-	elif Input.is_action_pressed("shoot") and not is_shooting:
+	elif Input.is_action_pressed("shoot") and !is_shooting:
 		is_shooting = true
 		await shoot()
 	
-	elif Input.is_action_pressed("melee") and not is_meleeing:
+	elif Input.is_action_pressed("melee") and !is_meleeing:
 		is_meleeing = true
 		await melee()
 

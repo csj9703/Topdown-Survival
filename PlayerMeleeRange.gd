@@ -7,12 +7,22 @@ func _init() -> void:
 	
 func _ready() -> void:
 	connect("area_entered", self._on_area_entered)
-
+	connect("area_exited", self._on_area_exited)
+	
 # Player entering the zombies' melee range
 func _on_area_entered(area: Area2D) -> void:
-	if  area is ZombieMeleeRange:
+	if area is ZombieMeleeRange:
 		var zmr = area as ZombieMeleeRange
 		if zmr == null:
 			return
 		print('Zombie attacking!')
-		zmr.get_owner().stop_and_attack()
+		zmr.get_owner().start_attacking()
+
+# Player leaving the zombies' melee range
+func _on_area_exited(area: Area2D) -> void:
+	if area is ZombieMeleeRange:
+		var zmr = area as ZombieMeleeRange
+		if zmr == null:
+			return
+		print('Zombie stopped attacking!')
+		zmr.get_owner().stop_attacking()
