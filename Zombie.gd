@@ -19,7 +19,7 @@ func _physics_process(_delta: float) -> void:
 		
 		var direction = Vector2(cos(rotation), sin(rotation)).normalized()
 		velocity = direction * move_speed
-		move_and_slide()
+		move_and_collide(velocity * _delta)
 
 	if is_attacking:
 		attack_timer -= _delta

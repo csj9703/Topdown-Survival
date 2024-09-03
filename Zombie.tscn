@@ -245,10 +245,10 @@ disabled = true
 debug_color = Color(0.996078, 0, 0, 0.419608)
 
 [node name="HurtBox" type="Area2D" parent="Sprite2D"]
-visible = false
 script = ExtResource("4_fdwe8")
 
 [node name="CharacterHurtbox" type="CollisionShape2D" parent="Sprite2D/HurtBox"]
+visible = false
 position = Vector2(0.64, 8.375)
 scale = Vector2(10.74, 5.8)
 shape = SubResource("CapsuleShape2D_i1wyr")
@@ -258,6 +258,7 @@ debug_color = Color(0.668864, 0.479092, 0.0548048, 0.42)
 script = ExtResource("6_wnkb8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/ZombieMeleeRange"]
+visible = false
 position = Vector2(101.115, 0)
 scale = Vector2(4.34, 4.4)
 shape = SubResource("CapsuleShape2D_momg2")

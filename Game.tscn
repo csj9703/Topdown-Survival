@@ -170,9 +170,6 @@ disable_mode = 2
 [node name="Zombie" parent="." instance=ExtResource("4_ldpkp")]
 position = Vector2(180, 119)
 
-[node name="Zombie3" parent="." instance=ExtResource("4_ldpkp")]
-position = Vector2(220, 61)
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
 position = Vector2(0, 4.54747e-13)

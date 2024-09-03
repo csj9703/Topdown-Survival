@@ -394,7 +394,6 @@ hframes = 9
 vframes = 9
 
 [node name="HitBox" type="Area2D" parent="Sprite2D"]
-visible = false
 position = Vector2(99.345, 17.655)
 rotation = -0.507891
 scale = Vector2(1.105, 1.105)
@@ -409,7 +408,6 @@ disabled = true
 debug_color = Color(0.964706, 0, 0, 0.419608)
 
 [node name="HurtBox" type="Area2D" parent="Sprite2D"]
-visible = false
 position = Vector2(-4.5, 15.89)
 scale = Vector2(8.69, 4.62)
 skew = 0.18675
@@ -422,6 +420,7 @@ shape = SubResource("CapsuleShape2D_r06sk")
 debug_color = Color(0.667524, 0.510165, 0.0430527, 0.42)
 
 [node name="PlayerMeleeRange" type="Area2D" parent="Sprite2D"]
+visible = false
 script = ExtResource("7_lwm8b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/PlayerMeleeRange"]

@@ -92,7 +92,7 @@ func stun(duration: float) -> void:
 func _physics_process(delta) -> void:
 	if can_move:
 		get_input()
-		move_and_slide()
+		move_and_collide(velocity * delta)
 	
 	if is_stunned:
 		stun_timer -= delta
