@@ -1,7 +1,7 @@
-[gd_scene load_steps=71 format=3 uid="uid://b716so21wd2vl"]
+[gd_scene format=3 uid="uid://b716so21wd2vl"]
 
 [ext_resource type="Texture2D" uid="uid://duv611vfvc8s4" path="res://art/handgun/idle/survivor-idle_handgun_0.png" id="1_4lydt"]
-[ext_resource type="Script" path="res://Player.gd" id="1_ddbxm"]
+[ext_resource type="Script" uid="uid://cca4f5cb2xmy7" path="res://Player.gd" id="1_ddbxm"]
 [ext_resource type="Texture2D" uid="uid://p3dho3uu7hrh" path="res://art/handgun/idle/survivor-idle_handgun_1.png" id="2_0axu3"]
 [ext_resource type="Texture2D" uid="uid://bv4pn7knfn5as" path="res://art/handgun/idle/survivor-idle_handgun_2.png" id="3_nrf61"]
 [ext_resource type="Texture2D" uid="uid://csqk2ov8ct2n" path="res://art/handgun/idle/survivor-idle_handgun_3.png" id="4_w37ks"]
@@ -59,7 +59,7 @@
 [ext_resource type="Texture2D" uid="uid://du2wt2483osa" path="res://art/handgun/shoot/survivor-shoot_handgun_0.png" id="57_aawrr"]
 [ext_resource type="Texture2D" uid="uid://oql3jjwkfj0g" path="res://art/handgun/shoot/survivor-shoot_handgun_1.png" id="58_osw6g"]
 [ext_resource type="Texture2D" uid="uid://dhkbs3w6n3xwx" path="res://art/handgun/shoot/survivor-shoot_handgun_2.png" id="59_bw52r"]
-[ext_resource type="Script" path="res://Camera2D.gd" id="60_kpp5y"]
+[ext_resource type="Script" uid="uid://8mc4alpdgxaj" path="res://Camera2D.gd" id="60_kpp5y"]
 [ext_resource type="Texture2D" uid="uid://b52geo3nvj1kb" path="res://art/handgun/light.png" id="61_5m5lq"]
 [ext_resource type="Texture2D" uid="uid://dt8goj6cis4i" path="res://art/handgun/flashlight.png" id="62_hvkv2"]
 
@@ -126,7 +126,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("20_sexm8")
 }],
-"loop": false,
+"loop": 0,
 "name": &"idle",
 "speed": 10.0
 }, {
@@ -191,7 +191,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("41_xtk60")
 }],
-"loop": false,
+"loop": 0,
 "name": &"move",
 "speed": 10.0
 }, {
@@ -241,7 +241,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("56_in4xx")
 }],
-"loop": false,
+"loop": 0,
 "name": &"reload",
 "speed": 15.0
 }, {
@@ -255,7 +255,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("59_bw52r")
 }],
-"loop": false,
+"loop": 0,
 "name": &"shoot",
 "speed": 10.0
 }]
@@ -394,14 +394,25 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fmu46"]
 _data = {
-"RESET": SubResource("Animation_xnf58"),
-"idle": SubResource("Animation_2jw1p"),
-"move": SubResource("Animation_dpou2"),
-"reload": SubResource("Animation_s4dka"),
-"shoot": SubResource("Animation_qixmh")
+&"RESET": SubResource("Animation_xnf58"),
+&"idle": SubResource("Animation_2jw1p"),
+&"move": SubResource("Animation_dpou2"),
+&"reload": SubResource("Animation_s4dka"),
+&"shoot": SubResource("Animation_qixmh")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ud5ta"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:light_intensity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D" unique_id=246351297]
 position = Vector2(263, 157)
 slide_on_ceiling = false
 floor_stop_on_slope = false
@@ -409,7 +420,24 @@ floor_block_on_wall = false
 script = ExtResource("1_ddbxm")
 metadata/_edit_group_ = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="playerName" type="Label" parent="." unique_id=1731264575]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -27.0
+offset_right = 23.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 7
+text = "name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1239121300]
 position = Vector2(2, 2)
 zoom = Vector2(3, 3)
 limit_left = 0
@@ -423,27 +451,25 @@ rotation_smoothing_speed = 0.05
 editor_draw_limits = true
 script = ExtResource("60_kpp5y")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=390066288]
 position = Vector2(6.09998, 0.750002)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_6lqn7")
 animation = &"shoot"
 frame = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=894297344]
 position = Vector2(2.01998, 2.575)
 scale = Vector2(0.252, 0.171)
 shape = SubResource("CapsuleShape2D_w2mg3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_fmu46")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1819498675]
+libraries/ = SubResource("AnimationLibrary_fmu46")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1822686999]
 root_node = NodePath("../AnimationPlayer")
 
-[node name="Flashlight" type="PointLight2D" parent="."]
+[node name="Flashlight" type="PointLight2D" parent="." unique_id=1532414012]
 position = Vector2(5, 1)
 scale = Vector2(1, 0.75)
 energy = 0.5
@@ -452,16 +478,19 @@ shadow_filter_smooth = 6.5
 texture = ExtResource("62_hvkv2")
 offset = Vector2(167, 9)
 
-[node name="CharacterLight" type="PointLight2D" parent="."]
+[node name="CharacterLight" type="PointLight2D" parent="." unique_id=511785284]
 position = Vector2(5, 1)
 energy = 0.75
 shadow_enabled = true
 texture = ExtResource("61_5m5lq")
 texture_scale = 0.1
 
-[node name="MuzzleFlash" type="PointLight2D" parent="."]
+[node name="MuzzleFlash" type="PointLight2D" parent="." unique_id=92716364]
 position = Vector2(5, 1)
 shadow_enabled = true
 texture = ExtResource("61_5m5lq")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1183265141]
+replication_config = SubResource("SceneReplicationConfig_ud5ta")
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

@@ -6,10 +6,19 @@ extends CharacterBody2D
 @export var light_intensity = 1
 
 @onready var gun_light = $MuzzleFlash
+@onready var player_name: Label = $playerName
+@onready var camera_2d: Camera2D = $Camera2D
 
 var is_reloading = false
 var is_shooting = false
 var light_decay_timer = 0.0
+
+func _ready() -> void:
+	camera_2d.enabled = is_multiplayer_authority()
+
+func _enter_tree() -> void:
+	set_multiplayer_authority(int(str(name)))
+	#player_name.text = name
 
 func get_input():
 	if !is_reloading and !is_shooting:
@@ -64,6 +73,9 @@ func _physics_process(delta):
 		gun_light.energy = 0.0
 	
 func _process(_delta):
+	if !is_multiplayer_authority():
+		return
+	
 	$AnimatedSprite2D.play()
 
 	if Input.is_action_pressed("reload") and not is_reloading:
@@ -84,7 +96,13 @@ func _process(_delta):
 		$AnimatedSprite2D.animation = "idle"
 
 func _on_animated_sprite_2d_frame_changed():
+	if !is_multiplayer_authority():
+		return
+
 	if $AnimatedSprite2D.animation == "shoot" and $AnimatedSprite2D.frame == 1:
-		# Emit light from the gun
-		gun_light.energy = light_intensity
-		light_decay_timer = light_duration
+		play_muzzle_flash.rpc()
+		
+@rpc("authority", "call_local", "reliable")
+func play_muzzle_flash():
+	gun_light.energy = light_intensity
+	light_decay_timer = light_duration

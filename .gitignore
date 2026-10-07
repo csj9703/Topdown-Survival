@@ -1,2 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
+out/**/*.exe
+out/**/*.pck
+out/**/*.zip
