@@ -8,6 +8,8 @@ extends CharacterBody2D
 @onready var gun_light = $MuzzleFlash
 @onready var player_name: Label = $playerName
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 
 var is_reloading = false
 var is_shooting = false
@@ -57,43 +59,46 @@ func reload() -> void:
 	
 # TODO: Change this to use animation tree
 func shoot() -> void:
-	print('shooting')
-	$AnimatedSprite2D.play("shoot")
-	await $AnimatedSprite2D.animation_finished
+	print("shooting")
+	set_animation("shoot")
+	await animated_sprite_2d.animation_finished
 	is_shooting = false
 	
 func _physics_process(delta):
-	get_input()
-	move_and_slide()
+	if is_multiplayer_authority():
+		get_input()
+		move_and_slide()
+
 	# Decay the light over time
 	if light_decay_timer > 0:
 		light_decay_timer -= delta
-		gun_light.energy = max(0, gun_light.energy - delta * light_intensity / light_duration)
+		gun_light.energy = max(
+			0,
+			gun_light.energy - delta * light_intensity / light_duration
+		)
 	else:
 		gun_light.energy = 0.0
 	
 func _process(_delta):
 	if !is_multiplayer_authority():
 		return
-	
-	$AnimatedSprite2D.play()
 
 	if Input.is_action_pressed("reload") and not is_reloading:
 		is_reloading = true
 		await reload()
-		
+
 	elif Input.is_action_pressed("shoot") and not is_shooting:
 		is_shooting = true
 		await shoot()
 
-	if velocity.length() != 0:
-		$AnimatedSprite2D.animation = "move"
-	elif is_reloading:
-		$AnimatedSprite2D.animation = "reload"
+	if is_reloading:
+		set_animation("reload")
 	elif is_shooting:
-		$AnimatedSprite2D.animation = "shoot"
-	elif velocity.length() == 0:
-		$AnimatedSprite2D.animation = "idle"
+		set_animation("shoot")
+	elif velocity.length() != 0:
+		set_animation("move")
+	else:
+		set_animation("idle")
 
 func _on_animated_sprite_2d_frame_changed():
 	if !is_multiplayer_authority():
@@ -101,8 +106,20 @@ func _on_animated_sprite_2d_frame_changed():
 
 	if $AnimatedSprite2D.animation == "shoot" and $AnimatedSprite2D.frame == 1:
 		play_muzzle_flash.rpc()
-		
+	
+func set_animation(animation_name: String) -> void:
+	if animated_sprite_2d.animation == animation_name:
+		return
+
+	animated_sprite_2d.play(animation_name)
+	sync_animation.rpc(animation_name)
+
+#RPCs
 @rpc("authority", "call_local", "reliable")
 func play_muzzle_flash():
 	gun_light.energy = light_intensity
 	light_decay_timer = light_duration
+
+@rpc("authority", "call_remote", "unreliable")
+func sync_animation(animation_name: String) -> void:
+	animated_sprite_2d.play(animation_name)
