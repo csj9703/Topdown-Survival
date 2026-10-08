@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dmaqiffm0qv4g"]
+
+[ext_resource type="Script" uid="uid://xf0psc8d208e" path="res://zombie.gd" id="1_g6hu2"]
+[ext_resource type="Texture2D" uid="uid://c2w0l7vigu6kl" path="res://icon.svg" id="1_mauhj"]
+[ext_resource type="Script" uid="uid://be1dwvcf4kyk2" path="res://vision_collision.gd" id="3_vrb4v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rxtln"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mauhj")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pnwp"]
+
+[node name="Zombie" type="CharacterBody2D" unique_id=196170265]
+rotation = -1.5707964
+script = ExtResource("1_g6hu2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=584452160]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_rxtln")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=240369932]
+scale = Vector2(0.6399987, 0.6399986)
+shape = SubResource("RectangleShape2D_0pnwp")
+disabled = true
+
+[node name="Vision" type="Area2D" parent="." unique_id=513203475]
+
+[node name="VisionCollision" type="CollisionPolygon2D" parent="Vision" unique_id=304233903]
+polygon = PackedVector2Array(0, 0, -24, 56, 24, 56)
+script = ExtResource("3_vrb4v")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=598432702]
+debug_enabled = true
+
+[connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]
+[connection signal="body_exited" from="Vision" to="." method="_on_vision_body_exited"]

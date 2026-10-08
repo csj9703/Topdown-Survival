@@ -17,6 +17,7 @@ var light_decay_timer = 0.0
 
 func _ready() -> void:
 	camera_2d.enabled = is_multiplayer_authority()
+	add_to_group("players")
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(int(str(name)))
